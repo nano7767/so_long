@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: svikornv <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 13:53:39 by svikornv          #+#    #+#              #
-#    Updated: 2023/06/05 14:15:15 by svikornv         ###   ########.fr        #
+#    Updated: 2023/06/13 13:40:23 by svikornv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ INCLUDE_DIR = includes
 
 #Sources and objects
 SRCS =	main.c \
+		map.c \
+		#get_next_line.c \
+		#get_next_line_utils.c \ 
+		#test.txt
 		#init.c \
 		#image.c \
 		#hook.c \
