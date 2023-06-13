@@ -47,40 +47,7 @@ char	**create_grid(t_map *map)
 	}
 	return (grid);
 }
-/*
-void	fill_grid(char **grid, char *lines, t_map *map)
-{
-	int	i;
-	int	j;
-	int	k;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	map->exit_count = 0;
-	map->collectible_count = 0;
-	map->player_count = 0;
-	while (lines[k])
-	{
-		if (j == map->width)
-		{
-			i++;
-			j = 0;
-			k++;
-		}
-		grid[i][j] = lines[k];
-		if (lines[k] == 'E')
-			map->exit_count++;
-		else if (lines[k] == 'C')
-			map->collectible_count++;
-		else if (lines[k] == 'P')
-			map->player_count++;
-		k++;
-		j++;
-	}
-	map->grid = grid;
-}
-*/
 void	fill_grid(char **grid, char *lines, t_map *map)
 {
 	int	i;
@@ -113,7 +80,7 @@ void	fill_grid(char **grid, char *lines, t_map *map)
 	}
 	map->grid = grid;
 }
-
+/*
 void	draw_map(t_map *map)
 {
 	void	*mlx;
@@ -152,3 +119,41 @@ void	draw_map(t_map *map)
 	}
 	mlx_loop(mlx);
 }
+*/
+
+void	draw_map(t_map *map)
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	int		i;
+	int		j;
+	int		cell_size;
+
+	cell_size = 60;
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, map->width * cell_size, map->height * cell_size, "Map");
+	img = mlx_xpm_file_to_image(mlx, WALL_IMG, &cell_size, &cell_size);
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->grid[i][j] == '0')
+				mlx_put_image_to_window(mlx, win, img, j * cell_size, i * cell_size);
+			else if (map->grid[i][j] == '1')
+				mlx_put_image_to_window(mlx, win, img, j * cell_size, i * cell_size);
+			else if (map->grid[i][j] == 'C')
+				mlx_pixel_put(mlx, win, j * cell_size, i * cell_size, 0x00FFD700);
+			else if (map->grid[i][j] == 'E')
+				mlx_pixel_put(mlx, win, j * cell_size, i * cell_size, 0x00FF0000);
+			else if (map->grid[i][j] == 'P')
+				mlx_pixel_put(mlx, win, j * cell_size, i * cell_size, 0x0000FF00);
+			j++;
+		}
+		i++;
+	}
+	mlx_loop(mlx);
+}
+
