@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:08:34 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/18 13:28:47 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:22:49 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ void	move_player(t_vars *v, int x, int y)
 	printf("collectible count:%d\n", v->map->collectible_count);
 	if (v->map->collectible_count == 0)
 		mlx_destroy_window(v->mlx, v->win);
-	if (v->map->grid[new_y][new_x] != '1')
+	if (v->map->grid[new_y][new_x] != '1' || (v->map->grid[new_y][new_x] == 'E' && v->map->collectible_count != 0))
 	{
 		if (v->map->grid[new_y][new_x] == 'C')
 		{
 			v->map->collectible_count--;
 			v->map->grid[new_y][new_x] = '0';
 		}
-		if (v->map->grid[new_y][new_x] == 'E' && v->map->collectible_count == 0)
+		else if (v->map->grid[new_y][new_x] == 'E' && v->map->collectible_count == 0)
+			mlx_destroy_window(v->mlx, v->win);
+		else if (v->map->grid[new_y][new_x] == 'M')
 			mlx_destroy_window(v->mlx, v->win);
 		v->map->grid[v->coord->y][v->coord->x] = '0';
 		v->coord->x = new_x;

@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:05:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/18 12:43:09 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/18 13:40:42 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		filename = MAP_FILE;
 	else
-		filename = argv[1];
+		filename = ft_strjoin("maps/", argv[1]);
 	 
 	lines = extract_file(filename, map);
 	if (!lines)
