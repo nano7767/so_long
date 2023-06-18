@@ -48,11 +48,12 @@ char	**create_grid(t_map *map)
 	return (grid);
 }
 
-void	fill_grid(char **grid, char *lines, t_map *map)
+void	fill_grid(char **grid, char *lines, t_map *map, t_player *coord)
 {
 	int	i;
 	int	j;
 	int	k;
+//	t_player	coord;
 
 	i = 0;
 	j = 0;
@@ -69,7 +70,12 @@ void	fill_grid(char **grid, char *lines, t_map *map)
 			else if (lines[k] == 'C')
 				map->collectible_count++;
 			else if (lines[k] == 'P')
+			{
 				map->player_count++;
+				coord->x = j;
+				coord->y = i;
+			}
+				
 			grid[i][j] = lines[k];
 			j++;
 			k++;
@@ -80,80 +86,50 @@ void	fill_grid(char **grid, char *lines, t_map *map)
 	}
 	map->grid = grid;
 }
-/*
-void	draw_map(t_map *map)
-{
-	void	*mlx;
-	void	*win;
-	int	i;
-	int	j;
-	int	cell_size;
-	int	colour;
 
-	cell_size = 50;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, map->width * cell_size, map->height * cell_size, "Map");
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->grid[i][j] == '0')
-				colour = 0x00FFFFFF;
-			else if (map->grid[i][j] == '1')
-				colour = 0x0000000;
-			else if (map->grid[i][j] == 'C')
-				colour = 0x00FFD700;
-			else if (map->grid[i][j] == 'E')
-				colour = 0x00FF0000;
-			else if (map->grid[i][j] == 'P')
-				colour =  0x0000FF00;
-			mlx_pixel_put(mlx, win, j * cell_size, i * cell_size, colour);
-			mlx_pixel_put(mlx, win, j * cell_size + cell_size - 1, i * cell_size, colour);
-			mlx_pixel_put(mlx, win, j * cell_size, i * cell_size + cell_size - 1, colour);
-			mlx_pixel_put(mlx, win, j * cell_size + cell_size - 1, i * cell_size + cell_size - 1, colour);
-			j++;
-		}
-		i++;
-	}
-	mlx_loop(mlx);
-}
-*/
-
-void	draw_map(t_map *map)
+void	draw_map(t_map *map, t_player *coord)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
+	t_vars	v;
+	void	*wall;
+	void	*collectibles;
+	void	*enemy;
+	void	*player;
 	int		i;
 	int		j;
 	int		cell_size;
 
-	cell_size = 60;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, map->width * cell_size, map->height * cell_size, "Map");
-	img = mlx_xpm_file_to_image(mlx, WALL_IMG, &cell_size, &cell_size);
+	cell_size = 50;
+	v.mlx = mlx_init();
+	v.win = mlx_new_window(v.mlx, map->width * cell_size, map->height * cell_size, "Map");
+	wall = mlx_xpm_file_to_image(v.mlx, WALL_IMG, &cell_size, &cell_size);
+	collectibles = mlx_xpm_file_to_image(v.mlx, COLLECTIBLES_IMG, &cell_size, &cell_size);
+	enemy = mlx_xpm_file_to_image(v.mlx, ENEMY_IMG, &cell_size, &cell_size);
+	player = mlx_xpm_file_to_image(v.mlx, PLAYER_IMG, &cell_size, &cell_size);
 	i = 0;
 	while (i < map->height)
 	{
 		j = 0;
 		while (j < map->width)
 		{
-			if (map->grid[i][j] == '0')
-				mlx_put_image_to_window(mlx, win, img, j * cell_size, i * cell_size);
-			else if (map->grid[i][j] == '1')
-				mlx_put_image_to_window(mlx, win, img, j * cell_size, i * cell_size);
+			if (map->grid[i][j] == '1')
+				mlx_put_image_to_window(v.mlx, v.win, wall, j * cell_size * 0.75, i * cell_size * 0.75);
 			else if (map->grid[i][j] == 'C')
-				mlx_pixel_put(mlx, win, j * cell_size, i * cell_size, 0x00FFD700);
+				mlx_put_image_to_window(v.mlx, v.win, collectibles,  j * cell_size * 0.75, i * cell_size * 0.75);
 			else if (map->grid[i][j] == 'E')
-				mlx_pixel_put(mlx, win, j * cell_size, i * cell_size, 0x00FF0000);
-			else if (map->grid[i][j] == 'P')
-				mlx_pixel_put(mlx, win, j * cell_size, i * cell_size, 0x0000FF00);
+				mlx_put_image_to_window(v.mlx, v.win, enemy, j * cell_size * 0.75, i * cell_size * 0.75);
+			//else if (map->grid[i][j] == 'P')
+				//mlx_put_image_to_window(v.mlx, v.win, player, j *cell_size * 0.75, i * cell_size * 0.75);
 			j++;
 		}
 		i++;
 	}
-	mlx_loop(mlx);
-}
 
+	mlx_put_image_to_window(v.mlx, v.win, player, coord->x * cell_size * 0.75, coord->y * cell_size * 0.75);
+	/*v.coord->x = coord->x;
+	v.coord->y = coord->y;
+	v.map->grid = map->grid;*/
+	v.coord = coord;
+	v.map = map;
+	mlx_key_hook(v.win, key_hook, &v);
+	mlx_loop(v.mlx);
+}
