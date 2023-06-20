@@ -6,7 +6,7 @@
 #    By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 13:53:39 by svikornv          #+#    #+#              #
-#    Updated: 2023/06/15 17:36:05 by svikornv         ###   ########.fr        #
+#    Updated: 2023/06/20 15:54:02 by svikornv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ INCLUDE_DIR = includes
 SRCS =	main.c \
 		map.c \
 		keyhook.c \
-		player.c
+		player.c \
+		validity.c
 		#get_next_line.c \
 		#get_next_line_utils.c \ 
 		#test.txt
