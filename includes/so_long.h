@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:07:24 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/18 13:09:44 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:41:12 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@
 #include <fcntl.h>
 #include <mlx.h>
 #include "libft.h"
+# define CELL_SIZE 32
 # define MAP_FILE	"maps/classic.ber"
 # define WALL_IMG	"maps/wall.xpm"
 # define COLLECTIBLES_IMG	"maps/collectibles.xpm"
-# define ENEMY_IMG	"maps/enemy.xpm"
+# define MONSTER_IMG	"maps/monster.xpm"
 # define PLAYER_IMG	"maps/player.xpm"
+# define EXIT_IMG	"maps/exit.xpm"
+# define BACKGROUND_IMG "maps/background.xpm"
 
 typedef struct s_map
 {
@@ -59,14 +62,20 @@ typedef struct s_vars
 }		t_vars;
 
 //map.c
-char	*extract_file(char *filename, t_map *map);
-char	**create_grid(t_map *map);
-void	fill_grid(char **grid, char *lines, t_map *map, t_player *coord);
-void	draw_map(t_map *map, t_player *coord);
+char	*extract_file(char *filename, t_vars *v);
+char	**create_grid(t_vars *v);
+void	fill_grid(char **grid, char *lines, t_vars *v);
+void	draw_map(t_vars *v);
 
 //keyhook.c
 int	key_hook(int keycode, t_vars *v);
 
 //player.c
 void	move_player(t_vars *v, int x, int y);
+
+//validity.c
+void	map_legality(t_vars *v);
+int	is_rectangular(t_vars *v);
+int	is_surrounded_by_walls(t_vars *v);
+
 #endif

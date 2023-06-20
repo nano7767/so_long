@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:15:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/18 13:25:05 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:30:53 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ typedef struct s_vars
 */
 int	key_hook(int keycode, t_vars *v)
 {
-	printf("the coord->x %d\n", v->coord->x);
-	printf("the coord->y %d\n", v->coord->y);
+	ft_printf("the coord->x %d\n", v->coord->x);
+	ft_printf("the coord->y %d\n", v->coord->y);
 	if (keycode == 53)
 		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 13)
