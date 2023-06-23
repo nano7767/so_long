@@ -6,22 +6,16 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:15:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/20 13:30:53 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/23 10:00:54 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-/*
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-}		t_vars;
-*/
+
 int	key_hook(int keycode, t_vars *v)
 {
-	ft_printf("the coord->x %d\n", v->coord->x);
-	ft_printf("the coord->y %d\n", v->coord->y);
+	ft_printf("coord->x %d\n", v->coord->x);
+	ft_printf("coord->y %d\n", v->coord->y);
 	if (keycode == 53)
 		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 13)
@@ -34,13 +28,3 @@ int	key_hook(int keycode, t_vars *v)
 		move_player(v, 1, 0);
 	return (0);
 }
-/*
-int	main(void)
-{
-	t_vars	v;
-
-	v.mlx = mlx_init();
-	v.win = mlx_new_window(v.mlx, 640, 480, "window.exe");
-	mlx_key_hook(v.win, key_hook, &v);
-	mlx_loop(v.mlx);
-}*/

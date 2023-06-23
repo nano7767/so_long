@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:41:14 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/20 16:20:06 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:02:25 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	map_legality(t_vars *v)
 {
 	if ((!is_rectangular(v)) || (!is_surrounded_by_walls(v)))
 	{
-		//free_map(map);
+		ft_printf("Error\n");
 		ft_printf("not rectangular or surrounded by walls");
 		exit(1);
 	}
-	if (v->map->exit_count != 1 || v->map->collectible_count < 1 || v->map->player_count != 1)
+	if (v->map->exit_count != 1 || v->map->collectibles_count < 1 || v->map->player_count != 1)
 	{
-		//free_map(map);
+		ft_printf("Error\n");
 		ft_printf("exit/player count is not 1 or collectibles is less than 1");
 		exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:07:24 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/20 16:41:12 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:57:25 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <fcntl.h>
 #include <mlx.h>
 #include "libft.h"
-# define CELL_SIZE 32
+# define CS 32
 # define MAP_FILE	"maps/classic.ber"
 # define WALL_IMG	"maps/wall.xpm"
 # define COLLECTIBLES_IMG	"maps/collectibles.xpm"
@@ -34,32 +34,35 @@ typedef struct s_map
 	int	height;
 	char	**grid;
 	int	exit_count;
-	int	collectible_count;
+	int	collectibles_count;
 	int	player_count;
-}		t_map;
+}			t_map;
 
 typedef struct s_player
 {
 	int		x;
 	int		y;
-}			t_player;
+}
+			t_player;
 
-typedef struct s_data
+typedef struct s_img
 {
-	void	*img;
-	char	*addr;
-	int	bits_per_pixel;
-	int	line_length;
-	int	endian;
-}		t_data;
+	void	*w;
+	void	*c;
+	void	*m;
+	void	*e;
+	void	*p;
+}			t_img;
 
 typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
+	int	move_count;
 	t_map	*map;
 	t_player	*coord;
-}		t_vars;
+	t_img	*img;
+}			t_vars;
 
 //map.c
 char	*extract_file(char *filename, t_vars *v);

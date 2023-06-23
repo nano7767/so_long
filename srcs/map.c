@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/23 09:59:33 by svikornv          #+#    #+#             */
+/*   Updated: 2023/06/23 15:05:23 by svikornv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 char	*extract_file(char *filename, t_vars *v)
 {
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
 	char	*lines;
 	char	*tmp;
 	char	*next;
@@ -28,11 +40,10 @@ char	*extract_file(char *filename, t_vars *v)
 	return (lines);
 }
 
-
 char	**create_grid(t_vars *v)
 {
 	char	**grid;
-	int	i;
+	int		i;
 
 	grid = malloc(sizeof(char *) * v->map->height);
 	if (!grid)
@@ -52,58 +63,45 @@ void	fill_grid(char **grid, char *lines, t_vars *v)
 {
 	int	i;
 	int	j;
-	int	k;
-//	t_player	coord;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	v->map->exit_count = 0;
-	v->map->collectible_count = 0;
-	v->map->player_count = 0;
-	while (lines[k])
+	while (i < v->map->height)
 	{
+		j = 0;
 		while (j < v->map->width)
 		{
-			if (lines[k] == 'E')
+			if (lines[j + (i * v->map->width)] == 'E')
 				v->map->exit_count++;
-			else if (lines[k] == 'C')
-				v->map->collectible_count++;
-			else if (lines[k] == 'P')
+			else if (lines[j + (i * v->map->width)] == 'C')
+				v->map->collectibles_count++;
+			else if (lines[j + (i * v->map->width)] == 'P')
 			{
 				v->map->player_count++;
 				v->coord->x = j;
 				v->coord->y = i;
-			}
-				
-			grid[i][j] = lines[k];
+			}	
+			grid[i][j] = lines[j + (i * v->map->width)];
 			j++;
-			k++;
 		}
-		grid[i][j] = '\0';
-		j = 0;
-		i++;
+		grid[i++][j] = '\0';
 	}
 	v->map->grid = grid;
 }
 
 void	draw_map(t_vars *v)
 {
-	//t_vars	vars;
-	void	*wall;
-	void	*collectibles;
-	void	*monster;
-	void	*player;
-	void	*exit;
+//	t_img	img;
 	int		i;
 	int		j;
-	int		cell_size;
+	int		s;
+	char	*move_count_str;
 
-	wall = mlx_xpm_file_to_image(v->mlx, WALL_IMG, &cell_size, &cell_size);
-	collectibles = mlx_xpm_file_to_image(v->mlx, COLLECTIBLES_IMG, &cell_size, &cell_size);
-	monster = mlx_xpm_file_to_image(v->mlx, MONSTER_IMG, &cell_size, &cell_size);
-	player = mlx_xpm_file_to_image(v->mlx, PLAYER_IMG, &cell_size, &cell_size);
-	exit = mlx_xpm_file_to_image(v->mlx, EXIT_IMG, &cell_size, &cell_size);
+	v->img->w = mlx_xpm_file_to_image(v->mlx, WALL_IMG, &s, &s);
+	v->img->c = mlx_xpm_file_to_image(v->mlx, COLLECTIBLES_IMG, &s, &s);
+	v->img->m = mlx_xpm_file_to_image(v->mlx, MONSTER_IMG, &s, &s);
+	v->img->p = mlx_xpm_file_to_image(v->mlx, PLAYER_IMG, &s, &s);
+	v->img->e = mlx_xpm_file_to_image(v->mlx, EXIT_IMG, &s, &s);
+	move_count_str = ft_itoa(v->move_count);
 	i = 0;
 	while (i < v->map->height)
 	{
@@ -111,19 +109,20 @@ void	draw_map(t_vars *v)
 		while (j < v->map->width)
 		{
 			if (v->map->grid[i][j] == '1')
-				mlx_put_image_to_window(v->mlx, v->win, wall, j * CELL_SIZE, i * CELL_SIZE);
+				mlx_put_image_to_window(v->mlx, v->win, v->img->w, j * CS, i * CS);
 			else if (v->map->grid[i][j] == 'C')
-				mlx_put_image_to_window(v->mlx, v->win, collectibles,  j * CELL_SIZE, i * CELL_SIZE);
+				mlx_put_image_to_window(v->mlx, v->win, v->img->c, j * CS, i * CS);
 			else if (v->map->grid[i][j] == 'M')
-				mlx_put_image_to_window(v->mlx, v->win, monster, j * CELL_SIZE, i * CELL_SIZE);
+				mlx_put_image_to_window(v->mlx, v->win, v->img->m, j * CS, i * CS);
 			else if (v->map->grid[i][j] == 'E')
-				mlx_put_image_to_window(v->mlx, v->win, exit, j * CELL_SIZE, i * CELL_SIZE);
+				mlx_put_image_to_window(v->mlx, v->win, v->img->e, j * CS, i * CS);
 			j++;
 		}
 		i++;
 	}
-
-	mlx_put_image_to_window(v->mlx, v->win, player, v->coord->x * CELL_SIZE, v->coord->y * CELL_SIZE);
+	mlx_string_put(v->mlx, v->win, 10, 10, 0xFFFFFF, "Moves: ");
+	mlx_string_put(v->mlx, v->win, 60, 10, 0xFFFFFF, move_count_str);
+	mlx_put_image_to_window(v->mlx, v->win, v->img->p, v->coord->x * CS, v->coord->y * CS);
 	mlx_key_hook(v->win, key_hook, v);
 	mlx_loop(v->mlx);
 }
