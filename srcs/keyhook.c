@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:15:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/23 10:00:54 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:56:40 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	key_hook(int keycode, t_vars *v)
 {
-	ft_printf("coord->x %d\n", v->coord->x);
-	ft_printf("coord->y %d\n", v->coord->y);
+	ft_printf("collectible count: %d\n", v->map->collect_count);
 	if (keycode == 53)
 		mlx_destroy_window(v->mlx, v->win);
 	if (keycode == 13)
