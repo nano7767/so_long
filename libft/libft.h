@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 14:31:54 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/20 13:33:25 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:56:02 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 /*
 ft_printf
 */
-int	ft_printf(const char *input, ...);
-//static int	check_type(const char *input, void *arg);
-int	case_c(char c);
-int	case_d(int n);
-int	case_ex(unsigned long p);
-int	case_i(int n);
-int	case_p(unsigned long p);
-int	case_s(const char *s);
-int	case_u(unsigned int n);
-int	case_x(unsigned long p);
-//static int	inlen(unsigned int n);
-//static char	*make_string(unsigned long p, int *intlen);
+int		ft_printf(const char *input, ...);
+int		case_c(char c);
+int		case_d(int n);
+int		case_ex(unsigned long p);
+int		case_i(int n);
+int		case_p(unsigned long p);
+int		case_s(const char *s);
+int		case_u(unsigned int n);
+int		case_x(unsigned long p);
 #endif

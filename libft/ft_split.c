@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:12:03 by svikornv          #+#    #+#             */
-/*   Updated: 2023/03/08 15:37:42 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:56:52 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*copy_copy(const char *s, char c, unsigned int start)
 }
 
 char	**ft_split(const char *s, char c)
-{	
+{
 	char			**list_string;
 	size_t			j;
 	size_t			count;

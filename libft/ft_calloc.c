@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:55:09 by svikornv          #+#    #+#             */
-/*   Updated: 2023/03/08 16:43:58 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:56:27 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_calloc(size_t count, size_t size)
 	i = 0;
 	ptr = malloc(count * size);
 	if (ptr != NULL)
-	{	
+	{
 		ft_bzero(ptr, count * size);
 	}
 	return (ptr);

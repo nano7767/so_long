@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:10:34 by svikornv          #+#    #+#             */
-/*   Updated: 2023/03/08 16:48:39 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:56:41 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 			i++;
 		}
 		while (s2[i - ft_strlen(s1)] != '\0')
-		{	
+		{
 			s3[i] = s2[i - ft_strlen(s1)];
 			i++;
 		}
