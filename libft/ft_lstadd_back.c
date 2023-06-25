@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:16:54 by svikornv          #+#    #+#             */
-/*   Updated: 2023/03/13 15:03:03 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/09 13:29:37 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		return ;
 	}
 	ptr = ft_lstlast(*lst);
-	ptr -> next = new;
+	ptr->next = new;
 }
