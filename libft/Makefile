@@ -6,7 +6,9 @@ SRC = \
 	ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c\
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
 	ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c\
-	ft_lstadd_back.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c get_next_line.c get_next_line_utils.c
+	ft_lstadd_back.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c\
+	get_next_line.c get_next_line_utils.c\
+	case_c.c case_d.c case_ex.c case_i.c case_p.c case_s.c case_u.c case_x.c ft_printf.c
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
