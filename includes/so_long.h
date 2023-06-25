@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:07:24 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 15:00:53 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:52:03 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,14 @@ typedef struct s_vars
 {
 	void		*mlx;
 	void		*win;
+	char		*filename;
 	t_map		*map;
 	t_player	*p;
 	t_img		*img;
 }			t_vars;
 
 //map.c
-char	*extract_file(char *filename, t_vars *v);
+char	*extract_file(t_vars *v);
 char	**create_grid(t_vars *v);
 void	fill_grid(char **grid, char *lines, t_vars *v);
 void	player_movement(t_vars *v);
@@ -78,6 +79,7 @@ void	move_player(t_vars *v, int x, int y);
 
 //validity.c
 void	map_legality(t_vars *v);
+int		file_ext(t_vars *v);
 int		is_rectangular(t_vars *v);
 int		is_surrounded_by_walls(t_vars *v);
 

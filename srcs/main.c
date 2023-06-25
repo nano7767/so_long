@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:05:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 14:54:03 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:52:59 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	initialise(t_vars *v)
 int	main(int argc, char **argv)
 {
 	t_vars	*v;
-	char	*filename;
 	char	*lines;
 	char	**grid;
 
@@ -48,11 +47,11 @@ int	main(int argc, char **argv)
 	if (!v)
 		return (1);
 	if (argc == 1)
-		filename = MAP_FILE;
+		v->filename = MAP_FILE;
 	else
-		filename = ft_strjoin("maps/", argv[1]);
+		v->filename = ft_strjoin("maps/", argv[1]);
 	initialise(v);
-	lines = extract_file(filename, v);
+	lines = extract_file(v);
 	grid = create_grid(v);
 	fill_grid(grid, lines, v);
 	map_legality(v);

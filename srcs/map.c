@@ -6,13 +6,13 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 09:59:33 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 14:48:46 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:51:10 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*extract_file(char *filename, t_vars *v)
+char	*extract_file(t_vars *v)
 {
 	int		fd;
 	int		i;
@@ -23,7 +23,7 @@ char	*extract_file(char *filename, t_vars *v)
 	lines = ft_strdup("");
 	i = 0;
 	v->map->height = 0;
-	fd = open(filename, O_RDONLY);
+	fd = open(v->filename, O_RDONLY);
 	while (1)
 	{
 		tmp = lines;

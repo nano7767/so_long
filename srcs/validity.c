@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:41:14 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 14:27:29 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:53:59 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 void	map_legality(t_vars *v)
 {
+	if (!file_ext(v))
+	{
+		ft_printf("Error\n");
+		ft_printf("map file does not have .ber extension");
+		exit(1);
+	}
 	if ((!is_rectangular(v)) || (!is_surrounded_by_walls(v)))
 	{
 		ft_printf("Error\n");
@@ -24,9 +30,23 @@ void	map_legality(t_vars *v)
 		|| v->map->player_count != 1)
 	{
 		ft_printf("Error\n");
-		ft_printf("exit/player count is not 1 or collectibles is less than 1");
+		ft_printf("map does not meet minimum requirements");
 		exit(1);
 	}
+}
+
+int	file_ext(t_vars *v)
+{
+	char	*ext;
+	int		indx;
+	int		i;
+
+	ext = v->filename;
+	indx = (int)ft_strlen(v->filename) - 4;
+	i = 0;
+	if (!ft_strncmp((ext + indx), ".ber", 4))
+		return (1);
+	return (0);
 }
 
 int	is_rectangular(t_vars *v)
