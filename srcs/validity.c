@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:41:14 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 15:53:59 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:16:37 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	map_legality(t_vars *v)
 		ft_printf("not rectangular or surrounded by walls");
 		exit(1);
 	}
-	if (v->map->exit_count != 1 || v->map->collect_count < 1 
+	if (v->map->exit_count != 1 || v->map->collect_count < 1
 		|| v->map->player_count != 1)
 	{
 		ft_printf("Error\n");
@@ -70,7 +70,7 @@ int	is_surrounded_by_walls(t_vars *v)
 	i = 0;
 	while (i < v->map->width - 1)
 	{
-		if (v->map->grid[0][i] != '1' || 
+		if (v->map->grid[0][i] != '1' ||
 			v->map->grid[v->map->height - 1][i] != '1')
 			return (0);
 		i++;
@@ -78,7 +78,7 @@ int	is_surrounded_by_walls(t_vars *v)
 	i = 0;
 	while (i < v->map->height)
 	{
-		if (v->map->grid[i][0] != '1' || 
+		if (v->map->grid[i][0] != '1' ||
 			v->map->grid[i][v->map->width - 2] != '1')
 			return (0);
 		i++;

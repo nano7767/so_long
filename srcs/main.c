@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:05:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 15:52:59 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:40:41 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	grid = create_grid(v);
 	fill_grid(grid, lines, v);
 	map_legality(v);
-	v->win = mlx_new_window(v->mlx, v->map->width * CS, 
+	v->win = mlx_new_window(v->mlx, v->map->width * CS,
 			v->map->height * CS, "map.c");
 	draw_map(v);
 	free(grid);

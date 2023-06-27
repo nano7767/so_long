@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 09:59:33 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 15:51:10 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/27 12:25:51 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	player_movement(t_vars *v)
 	mlx_put_image_to_window(
 		v->mlx, v->win, v->img->p, v->p->x * CS, v->p->y * CS);
 	mlx_key_hook(v->win, key_hook, v);
+	red_cross(v);
 }
 
 void	draw_map(t_vars *v)

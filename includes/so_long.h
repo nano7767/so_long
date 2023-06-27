@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:07:24 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/25 15:52:03 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/27 12:27:46 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,7 @@ int		file_ext(t_vars *v);
 int		is_rectangular(t_vars *v);
 int		is_surrounded_by_walls(t_vars *v);
 
+//exit.c
+int		exit_program(t_vars *v);
+void	red_cross(t_vars *v);
 #endif
