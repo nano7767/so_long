@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 11:07:24 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/27 12:27:46 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:14:02 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <mlx.h>
 # include "libft.h"
 # define CS 32
-# define MAP_FILE	"maps/classic.ber"
+# define MAP_FILE	"maps/long.ber"
 # define WALL_IMG	"assets/wall.xpm"
 # define COLLECTIBLES_IMG	"assets/collectibles.xpm"
 # define MONSTER_IMG	"assets/monster.xpm"
@@ -54,6 +54,15 @@ typedef struct s_img
 	void	*p;
 }			t_img;
 
+typedef struct s_error
+{
+	int		invalid_file;
+	int		file_ext;
+	int		rectangular;
+	int		walls;
+	int		character;
+}			t_error;
+
 typedef struct s_vars
 {
 	void		*mlx;
@@ -62,6 +71,7 @@ typedef struct s_vars
 	t_map		*map;
 	t_player	*p;
 	t_img		*img;
+	t_error		*error;
 }			t_vars;
 
 //map.c
@@ -79,9 +89,8 @@ void	move_player(t_vars *v, int x, int y);
 
 //validity.c
 void	map_legality(t_vars *v);
-int		file_ext(t_vars *v);
-int		is_rectangular(t_vars *v);
-int		is_surrounded_by_walls(t_vars *v);
+void	file_validity(t_vars *v);
+void	map_ting(t_vars *v);
 
 //exit.c
 int		exit_program(t_vars *v);

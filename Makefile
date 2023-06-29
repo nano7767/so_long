@@ -6,7 +6,7 @@
 #    By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/05 13:53:39 by svikornv          #+#    #+#              #
-#    Updated: 2023/06/20 15:54:02 by svikornv         ###   ########.fr        #
+#    Updated: 2023/06/29 17:11:01 by svikornv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRCS =	main.c \
 		map.c \
 		keyhook.c \
 		player.c \
-		validity.c
+		validity.c \
+		exit.c
 		#get_next_line.c \
 		#get_next_line_utils.c \ 
 		#test.txt
