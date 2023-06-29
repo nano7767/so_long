@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:05:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/29 12:11:44 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/29 16:03:12 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	initialise(t_vars *v)
 	v->map->exit_count = 0;
 	v->map->collect_count = 0;
 	v->map->player_count = 0;
+	v->map->height = 0;
 	v->p->move_count = 0;
 	v->error->invalid_file = 0;
 	v->error->file_ext = 0;
@@ -71,6 +72,5 @@ int	main(int argc, char **argv)
 	v->win = mlx_new_window(v->mlx, v->map->width * CS,
 			v->map->height * CS, "map.c");
 	draw_map(v);
-	free(grid);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: svikornv <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 09:59:33 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/29 12:01:40 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/29 16:03:54 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*extract_file(t_vars *v)
 
 	lines = ft_strdup("");
 	i = 0;
-	v->map->height = 0;
 	fd = open(v->filename, O_RDONLY);
 	while (1)
 	{
@@ -32,11 +31,12 @@ char	*extract_file(t_vars *v)
 			break ;
 		lines = ft_strjoin(tmp, next);
 		free(tmp);
-		tmp = NULL;
+		free(next);
 		v->map->height++;
 		if (v->map->height == 1)
 			v->map->width = ft_strlen(lines);
 	}
+	close(fd);
 	return (lines);
 }
 
@@ -91,9 +91,13 @@ void	fill_grid(char **grid, char *lines, t_vars *v)
 void	player_movement(t_vars *v)
 {
 	char	*move_count_str;
+	char	*moves;
 
-	move_count_str = ft_strjoin("Moves: ", ft_itoa(v->p->move_count));
-	mlx_string_put(v->mlx, v->win, 10, 10, 0xFFFFFF, move_count_str);
+	move_count_str = ft_itoa(v->p->move_count);
+	moves = ft_strjoin("Moves : ", move_count_str);
+	mlx_string_put(v->mlx, v->win, 10, 10, 0xFFFFFF, moves);
+	free(move_count_str);
+	free(moves);
 	mlx_put_image_to_window(
 		v->mlx, v->win, v->img->p, v->p->x * CS, v->p->y * CS);
 	mlx_key_hook(v->win, key_hook, v);
