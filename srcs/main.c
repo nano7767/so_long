@@ -6,16 +6,14 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:05:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/27 11:40:41 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/06/29 12:11:44 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	initialise(t_vars *v)
+void	init_malloc(t_vars *v)
 {
-	int	s;
-
 	v->map = malloc(sizeof(t_map));
 	if (!v->map)
 		return ;
@@ -25,11 +23,25 @@ void	initialise(t_vars *v)
 	v->img = malloc(sizeof(t_img));
 	if (!v->img)
 		return ;
+	v->error = malloc(sizeof(t_error));
+	if (!v->error)
+		return ;
+}
+
+void	initialise(t_vars *v)
+{
+	int	s;
+
 	v->mlx = mlx_init();
 	v->map->exit_count = 0;
 	v->map->collect_count = 0;
 	v->map->player_count = 0;
 	v->p->move_count = 0;
+	v->error->invalid_file = 0;
+	v->error->file_ext = 0;
+	v->error->rectangular = 0;
+	v->error->walls = 0;
+	v->error->character = 0;
 	v->img->w = mlx_xpm_file_to_image(v->mlx, WALL_IMG, &s, &s);
 	v->img->c = mlx_xpm_file_to_image(v->mlx, COLLECTIBLES_IMG, &s, &s);
 	v->img->m = mlx_xpm_file_to_image(v->mlx, MONSTER_IMG, &s, &s);
@@ -49,7 +61,8 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		v->filename = MAP_FILE;
 	else
-		v->filename = ft_strjoin("maps/", argv[1]);
+		v->filename = argv[1];
+	init_malloc(v);
 	initialise(v);
 	lines = extract_file(v);
 	grid = create_grid(v);
