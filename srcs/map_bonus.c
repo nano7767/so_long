@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 09:59:33 by svikornv          #+#    #+#             */
-/*   Updated: 2023/07/11 11:31:17 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/07/01 12:57:50 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ void	draw_map(t_vars *v)
 			else if (v->map->grid[i][j] == 'C')
 				mlx_put_image_to_window(
 					v->mlx, v->win, v->img->c, j * CS, i * CS);
+			else if (v->map->grid[i][j] == 'M')
+				mlx_put_image_to_window(
+					v->mlx, v->win, v->img->m, j * CS, i * CS);
 			else if (v->map->grid[i][j] == 'E')
 				mlx_put_image_to_window(
 					v->mlx, v->win, v->img->e, j * CS, i * CS);

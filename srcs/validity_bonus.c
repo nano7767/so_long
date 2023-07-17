@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validity.c                                         :+:      :+:    :+:   */
+/*   validity_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:41:14 by svikornv          #+#    #+#             */
-/*   Updated: 2023/07/17 13:16:21 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:22:22 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	map_ting(t_vars *v)
 		while (j < v->map->width - 1)
 		{
 			if (v->map->grid[i][j] != '1' && v->map->grid[i][j] != '0'
-				&& v->map->grid[i][j] != 'C' && v->map->grid
-				[i][j] != 'E' && v->map->grid[i][j] != 'P')
+				&& v->map->grid[i][j] != 'C' && v->map->grid[i][j] != 'M'
+				&& v->map->grid[i][j] != 'E' && v->map->grid[i][j] != 'P')
 				v->error->character = 1;
 			if (v->map->grid[0][j] != '1' ||
 			v->map->grid[v->map->height - 1][j] != '1')
@@ -115,7 +115,7 @@ void	path_validity(t_vars *v)
 int	path_finder(t_vars *v, char **grid, int x, int y)
 {
 	if (x < 0 || x >= v->map->width || y < 0 || y >= v->map->height
-		|| grid[y][x] == '1' || grid[y][x] == 'Y')
+		|| grid[y][x] == '1' || grid[y][x] == 'Y' || grid[y][x] == 'M')
 		return (1);
 	if (grid[y][x] == 'E')
 		grid[y][x] = 'Y';
@@ -133,7 +133,7 @@ int	path_finder(t_vars *v, char **grid, int x, int y)
 		x = 0;
 		while (++x < v->map->width - 1)
 		{
-			if (grid[y][x] != '1' && grid[y][x] != 'Y'
+			if (grid[y][x] != '1' && grid[y][x] != 'Y' && grid[y][x] != 'M'
 				&& grid[y][x] != '0')
 				return (1);
 		}

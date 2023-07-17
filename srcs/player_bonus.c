@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 11:54:37 by svikornv          #+#    #+#             */
-/*   Updated: 2023/07/11 11:30:32 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/07/11 11:05:51 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	move_player(t_vars *v, int x, int y)
 	{
 		v->map->collect_count--;
 		v->map->grid[v->p->y][v->p->x] = '0';
+	}
+	else if (v->map->grid[v->p->y][v->p->x] == 'M')
+	{
+		ft_printf("game over");
+		exit(1);
 	}
 	if (v->map->grid[v->p->y][v->p->x] == 'E' && v->map->collect_count == 0)
 	{

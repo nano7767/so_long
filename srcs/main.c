@@ -6,7 +6,7 @@
 /*   By: svikornv <svikornv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:05:36 by svikornv          #+#    #+#             */
-/*   Updated: 2023/06/29 16:03:12 by svikornv         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:10:33 by svikornv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	initialise(t_vars *v)
 	v->error->rectangular = 0;
 	v->error->walls = 0;
 	v->error->character = 0;
+	v->error->path = 0;
+	v->img->b = mlx_xpm_file_to_image(v->mlx, BACKGROUND_IMG, &s, &s);
 	v->img->w = mlx_xpm_file_to_image(v->mlx, WALL_IMG, &s, &s);
 	v->img->c = mlx_xpm_file_to_image(v->mlx, COLLECTIBLES_IMG, &s, &s);
 	v->img->m = mlx_xpm_file_to_image(v->mlx, MONSTER_IMG, &s, &s);
@@ -60,7 +62,10 @@ int	main(int argc, char **argv)
 	if (!v)
 		return (1);
 	if (argc == 1)
-		v->filename = MAP_FILE;
+	{
+		ft_printf("empty parameter\n");
+		return (1);
+	}
 	else
 		v->filename = argv[1];
 	init_malloc(v);
@@ -69,7 +74,7 @@ int	main(int argc, char **argv)
 	grid = create_grid(v);
 	fill_grid(grid, lines, v);
 	map_legality(v);
-	v->win = mlx_new_window(v->mlx, v->map->width * CS,
+	v->win = mlx_new_window(v->mlx, (v->map->width * CS) - 33,
 			v->map->height * CS, "map.c");
 	draw_map(v);
 	return (0);
